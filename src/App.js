@@ -1,54 +1,54 @@
 import React, { Component } from 'react';
-import Person from './Person/Person';
 import './App.css';
-
+import Validator from './Validator/Validator'
+import Char from './Char/Char'
 
 
 class App extends Component {
-  state = {
-    people: [
-      { name: 'Dnos', age: 26 },
-      { name: 'Sondn', age: 25 },
-      { name: 'Ignis', age: 20 }
-    ]
-  }
-  switchNameHandler = () => {
-    this.setState({
-      people: [
-        { name: 'sondn', age: 26 },
-        { name: 'Sondn', age: 25 },
-        { name: 'Ignis', age: 20 }
-      ]
-    })
-  }
-  changeName = (event) => {
-    this.setState({
-      people: [
-        { name: 'sondn', age: 26 },
-        { name: event.target.value, age: 25 },
-        { name: 'Ignis', age: 21 }
-      ]
-    })
-  }
-  render() {
-    const btnStyle = {
-      backgroundColor: 'dodgerblue',
-      color: 'white',
-      padding: '10px',
-      borderRadius: '3px',
-      border: '1px solid dodgerblue'
+  constructor(props){
+    super(props);
+    this.state = {
+      inputText: ''
     }
-    return (
-      <div  className="App">
-        <button style={btnStyle} onClick={this.switchNameHandler}>Switch name</button>
-        {/* <button onClick={this.switchNameHandler()}>Switch name</button> TODO: don't using function like this, it with be excute immidiately */}
-        <Person name={this.state.people[0].name} age={this.state.people[0].age}>
-          <i>I'm your son of first person</i>
-        </Person>
-        <Person name={this.state.people[1].name} age={this.state.people[1].age} changed={this.changeName} />
-        <Person name={this.state.people[2].name} age={this.state.people[2].age} />
+  }
+  handleInputChange = (event) => {
+    this.setState({
+      inputText: event.target.value
+    })
+  }
+  onClickCharacter = (idx) => {
+    const arrChar = this.state.inputText.split('');
+    arrChar.splice(idx,1);
+    this.setState({
+      inputText: arrChar.join('')
+    })
+  }
+  render(){
+    const style = {
+      textAlign: 'center',
+      marginTop: '20px',
+    }
+    const charList = this.state.inputText.split('').map((ch, idx) => {
+      return <Char 
+              c={ch}
+              key={idx}
+              clicked={() => this.onClickCharacter(idx)} />
+    })
+    return(
+      <div style={style}>
+        <input 
+          type="text" 
+          value={this.state.inputText}
+          onChange={(event) => this.handleInputChange(event)}/>
+        <br />
+        Input: {this.state.inputText} - Length: {this.state.inputText.length}
+        <br />
+        <Validator textLength={this.state.inputText.length} />
+        <br />
+        Char: 
+        {charList}
       </div>
-    )
+    );
   }
 }
 export default App;
