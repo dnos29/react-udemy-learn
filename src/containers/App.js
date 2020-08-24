@@ -6,14 +6,45 @@ import './App.css';
 
 
 class App extends Component {
-  state = {
-    people: [
-      { id: 1, name: 'Dnos', age: 26 },
-      { id: 2, name: 'Sondn', age: 25 },
-      { id: 3, name: 'Ignis', age: 20 }
-    ],
-    showPeople: false,
+  constructor(props){
+    super(props);
+    this.state = {
+      people: [
+        { id: 1, name: 'Dnos', age: 26 },
+        { id: 2, name: 'Sondn', age: 25 },
+        { id: 3, name: 'Ignis', age: 20 }
+      ],
+      showPeople: false,
+    }
+    console.log('[App.js] constructor ');
   }
+  
+  // static getDerivedStateFromProps(props){
+  //   console.log('[App.js] getDerivedStateFromProps', props);
+  //   return null;
+  // }
+  // render
+  // render children
+  componentWillMount(){
+    console.log('[App.js] componentWilMount');
+  }
+  componentDidMount(){
+    console.log('[App.js] componentDidMount');
+  }
+
+  shouldComponentUpdate(nextProps, nextStates){
+    console.log('[App.js] shouldComponentUpdate nextProps:', nextProps, 'nextStates:', nextStates);
+    return true;
+  }
+
+  componentDidUpdate(prevProps, prevStates){
+    console.log('[App.js] componentDidUpdate prevProps:', prevProps, 'prevStates:', prevStates);
+  }
+
+  // getSnapshotBeforeUpdate(prevProps, prevStates){
+  //   console.log('[App.js] getSnapshotBeforeUpdate prevProps:', prevProps, 'prevStates:', prevStates);
+  // }
+
   toggleShowPeople(){
     const showPeople = this.state.showPeople;
     this.setState({
@@ -29,7 +60,6 @@ class App extends Component {
   nameChangedHander = (event, id) => {
     const people = [...this.state.people]
     const idx = people.findIndex(p => p.id === id);
-    console.log(idx)
     let person = people[idx];
     person.name = event.target.value;
     people[idx] = person;
