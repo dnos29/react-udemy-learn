@@ -26,17 +26,17 @@ class App extends Component {
   // }
   // render
   // render children
-  componentWillMount(){
-    console.log('[App.js] componentWilMount');
-  }
-  componentDidMount(){
-    console.log('[App.js] componentDidMount');
-  }
+  // componentWillMount(){
+  //   console.log('[App.js] componentWilMount');
+  // }
+  // componentDidMount(){
+  //   console.log('[App.js] componentDidMount');
+  // }
 
-  shouldComponentUpdate(nextProps, nextStates){
-    console.log('[App.js] shouldComponentUpdate nextProps:', nextProps, 'nextStates:', nextStates);
-    // return true;
-  }
+  // shouldComponentUpdate(nextProps, nextStates){
+  //   console.log('[App.js] shouldComponentUpdate nextProps:', nextProps, 'nextStates:', nextStates);
+  //   return true;
+  // }
 
   componentDidUpdate(prevProps, prevStates){
     // console.log('[App.js] componentDidUpdate prevProps:', prevProps, 'prevStates:', prevStates);
@@ -88,7 +88,7 @@ class App extends Component {
               people={this.state.people}
               clicked={() => this.toggleShowPeople()}
             />) : null }
-        <button onClick={() => this.setState({showCockpit: !this.state.showCockpit})}>Toggle Cockput</button>
+        <button onClick={() => this.setState({showCockpit: !this.state.showCockpit})}>Toggle Cockpit</button>
         {people}
       </div>
     )
