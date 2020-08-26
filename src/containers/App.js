@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Cockpit from '../Components/Cockpit/Cockpit';
 import People from '../Components/People/People';
 import './App.css';
-
+import WithClass from '../hoc/WithClass'
 
 
 class App extends Component {
@@ -79,18 +79,19 @@ class App extends Component {
         />
       );
     }
+    console.log();
     return (
-      <div  className="App">
+      <WithClass  classes="App">
         { this.state.showCockpit ?
           (<Cockpit
               title={this.props.appTitle}
               showPeople={this.state.showPeople}
-              people={this.state.people}
+              peopleLength={this.state.people.length}
               clicked={() => this.toggleShowPeople()}
             />) : null }
         <button onClick={() => this.setState({showCockpit: !this.state.showCockpit})}>Toggle Cockpit</button>
         {people}
-      </div>
+      </WithClass>
     )
   }
 }

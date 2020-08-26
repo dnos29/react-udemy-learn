@@ -1,13 +1,14 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import Person from './Person/Person'
 
-class People extends Component {
+class People extends PureComponent {
   constructor(props){
     super(props);
     console.log('[People.js] constructor...');
   }
 
   render(){
+    console.log('[People.js] rendering...');
     return this.props.people.map(person => {
       return (
         <Person
