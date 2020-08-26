@@ -16,6 +16,7 @@ class App extends Component {
       ],
       showPeople: false,
       showCockpit: true,
+      changeCounter: 0,
     }
     console.log('[App.js] constructor ');
   }
@@ -64,8 +65,11 @@ class App extends Component {
     let person = people[idx];
     person.name = event.target.value;
     people[idx] = person;
-    this.setState({
-      people: people
+    this.setState((prevStates, props) => {
+      return {
+        people: people,
+        changeCounter: prevStates.changeCounter + 1
+      }
     })
   }
   render() {
