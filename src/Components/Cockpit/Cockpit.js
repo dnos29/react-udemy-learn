@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classes from './Cockpit.css'
 
 const Cockpit = (props) => {
@@ -13,6 +13,15 @@ const Cockpit = (props) => {
   if(props.people.length <= 1){
     assignedClasses.push(classes.bold)
   }
+
+  useEffect(() => {
+    console.log('[Cockpit.js] useEffect');
+    // return run when unmouted happen
+    return(() => {
+      console.log('[Cockpit.js] clennup');
+    })
+  }, []);
+
   return(
     <div className={classes.cockpit}>
       <h1>{props.title}</h1>

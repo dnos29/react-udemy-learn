@@ -15,6 +15,7 @@ class App extends Component {
         { id: 3, name: 'Ignis', age: 20 }
       ],
       showPeople: false,
+      showCockpit: true,
     }
     console.log('[App.js] constructor ');
   }
@@ -34,11 +35,11 @@ class App extends Component {
 
   shouldComponentUpdate(nextProps, nextStates){
     console.log('[App.js] shouldComponentUpdate nextProps:', nextProps, 'nextStates:', nextStates);
-    return true;
+    // return true;
   }
 
   componentDidUpdate(prevProps, prevStates){
-    console.log('[App.js] componentDidUpdate prevProps:', prevProps, 'prevStates:', prevStates);
+    // console.log('[App.js] componentDidUpdate prevProps:', prevProps, 'prevStates:', prevStates);
   }
 
   // getSnapshotBeforeUpdate(prevProps, prevStates){
@@ -80,12 +81,14 @@ class App extends Component {
     }
     return (
       <div  className="App">
-        <Cockpit
-          title={this.props.appTitle}
-          showPeople={this.state.showPeople}
-          people={this.state.people}
-          clicked={() => this.toggleShowPeople()}
-        />
+        { this.state.showCockpit ?
+          (<Cockpit
+              title={this.props.appTitle}
+              showPeople={this.state.showPeople}
+              people={this.state.people}
+              clicked={() => this.toggleShowPeople()}
+            />) : null }
+        <button onClick={() => this.setState({showCockpit: !this.state.showCockpit})}>Toggle Cockput</button>
         {people}
       </div>
     )
