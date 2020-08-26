@@ -4,6 +4,7 @@ import People from '../Components/People/People';
 import './App.css';
 import withClass from '../hoc/withClass'
 import AuxHoc from '../hoc/AuxHoc'
+import AuthContext from '../context/auth-context'
 
 class App extends Component {
   constructor(props){
@@ -17,6 +18,7 @@ class App extends Component {
       showPeople: false,
       showCockpit: true,
       changeCounter: 0,
+      isAuthenticated: false,
     }
     console.log('[App.js] constructor ');
   }
@@ -72,6 +74,11 @@ class App extends Component {
       }
     })
   }
+  loginHandler = () => {
+    this.setState({
+      isAuthenticated: true,
+    })
+  }
   render() {
     let people = null;
     if(this.state.showPeople){
@@ -80,21 +87,31 @@ class App extends Component {
           people={this.state.people}
           clicked={this.deletePersonHander}
           changed={this.nameChangedHander}
+          isAuthenticated={this.state.isAuthenticated}
         />
       );
     }
     console.log();
     return (
       <AuxHoc>
-        { this.state.showCockpit ?
-          (<Cockpit
-              title={this.props.appTitle}
-              showPeople={this.state.showPeople}
-              peopleLength={this.state.people.length}
-              clicked={() => this.toggleShowPeople()}
-            />) : null }
-        <button onClick={() => this.setState({showCockpit: !this.state.showCockpit})}>Toggle Cockpit</button>
-        {people}
+      <button 
+        onClick={() => this.setState({showCockpit: !this.state.showCockpit})}>
+          Toggle Cockpit
+      </button>
+        <AuthContext.Provider 
+          value={{
+            isAuthenticated: this.state.isAuthenticated,
+            login: this.loginHandler}}>
+          { this.state.showCockpit ?
+            (<Cockpit
+                title={this.props.appTitle}
+                showPeople={this.state.showPeople}
+                peopleLength={this.state.people.length}
+                clicked={() => this.toggleShowPeople()}
+                login={this.loginHandler}
+              />) : null }
+          {people}
+        </AuthContext.Provider>
       </AuxHoc>
     )
   }

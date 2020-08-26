@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import classes from './Person.css'
 import withClass from '../../../hoc/withClass'
+import AuthContext from '../../../context/auth-context'
 
 class Person extends Component {
   // constructor(props){
@@ -16,7 +17,10 @@ class Person extends Component {
   render() {
     return (
         // <> </> Short syntax
-        <Fragment> 
+        <Fragment>
+            <AuthContext.Consumer>
+            {(context) => context.isAuthenticated ? (<p> isAuthenticated: true </p>) : (<p> isAuthenticated: false </p>)}
+          </AuthContext.Consumer>
           <p onClick={this.props.click}>
               I'm {this.props.name} and I'm {this.props.age} year old
           </p>
@@ -37,5 +41,6 @@ Person.propTypes = {
   name: PropTypes.string,
   age: PropTypes.number,
   changed: PropTypes.func,
+  isAuthenticated: PropTypes.bool,
 }
 export default withClass(Person, 'person');

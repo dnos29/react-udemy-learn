@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import Person from './Person/Person'
+import AuthContext from '../../context/auth-context';
 
 class People extends PureComponent {
   constructor(props){
@@ -11,13 +12,16 @@ class People extends PureComponent {
     console.log('[People.js] rendering...');
     return this.props.people.map(person => {
       return (
-        <Person
+        <AuthContext.Consumer>
+        {(context) => <Person
           click={() => this.props.clicked(person.id)}
           name={person.name}
           age={person.age}
           key={person.id}
           changed={event => this.props.changed(event, person.id)}
-        />)
+        />}
+        </AuthContext.Consumer>
+        )
     }) 
   }
 }
