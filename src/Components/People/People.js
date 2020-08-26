@@ -12,7 +12,7 @@ class People extends PureComponent {
     console.log('[People.js] rendering...');
     return this.props.people.map(person => {
       return (
-        <AuthContext.Consumer>
+        <AuthContext.Consumer key={person.id}>
         {(context) => <Person
           click={() => this.props.clicked(person.id)}
           name={person.name}
