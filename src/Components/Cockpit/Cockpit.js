@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import classes from './Cockpit.css'
 
 const Cockpit = (props) => {
+  const btnRef = useRef(null);
+
   const assignedClasses = [];
   let btnClass = '';
   if(props.showPeople){
@@ -17,6 +19,7 @@ const Cockpit = (props) => {
   useEffect(() => {
     // run on ComponentDidMount
     console.log('[Cockpit.js] useEffect');
+    btnRef.current.click();
     // return run when unmouted happen
     return () => {
       console.log('[Cockpit.js] clean work useEffect');
@@ -38,7 +41,8 @@ const Cockpit = (props) => {
       </p>
       <button
         className={btnClass}
-        onClick={props.clicked}>Toggle People</button>
+        onClick={props.clicked}
+        ref={btnRef}>Toggle People</button>
     </div>
   )
 }
