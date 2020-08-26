@@ -19,9 +19,16 @@ const Cockpit = (props) => {
     console.log('[Cockpit.js] useEffect');
     // return run when unmouted happen
     return(() => {
-      console.log('[Cockpit.js] clennup');
+      console.log('[Cockpit.js] clean work useEffect');
     })
   }, []);
+
+  useEffect(()=> {
+    console.log('[Cockpit.js] useEffect 2nd');
+    return () => {
+      console.log('[Cockpit.js] clean work useEffect 2nd');
+    }
+  })
 
   return(
     <div className={classes.cockpit}>
