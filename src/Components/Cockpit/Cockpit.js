@@ -15,6 +15,7 @@ const Cockpit = (props) => {
   }
 
   useEffect(() => {
+    // run on ComponentDidMount
     console.log('[Cockpit.js] useEffect');
     // return run when unmouted happen
     return(() => {
